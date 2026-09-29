@@ -1,0 +1,17 @@
+{
+  "name": "www",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "check": "biome ci",
+    "fix": "biome check --write",
+    "test": "node --test 'test/**/*.test.js'",
+    "test:coverage": "node --test --experimental-test-coverage --test-coverage-exclude='test/**' 'test/**/*.test.js'"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.14"
+  }
+}

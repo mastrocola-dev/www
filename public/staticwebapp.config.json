@@ -6,6 +6,7 @@
   },
   "globalHeaders": {
     "X-Content-Type-Options": "nosniff",
-    "Referrer-Policy": "strict-origin-when-cross-origin"
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://raw.githubusercontent.com; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
   }
 }

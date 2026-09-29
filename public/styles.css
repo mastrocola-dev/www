@@ -56,10 +56,16 @@ body {
   border-bottom: 1px solid currentColor;
 }
 
-main {
+main,
+.hero {
   display: grid;
   justify-items: center;
   gap: 2.5rem;
+}
+
+.hero {
+  align-content: center;
+  min-height: calc(100svh - 12rem);
 }
 
 h1 {
@@ -97,6 +103,71 @@ a:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
   border-radius: 1px;
+}
+
+#adrs {
+  width: min(100%, 38rem);
+  display: grid;
+  gap: 2rem;
+  padding-top: 3.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--muted) 35%, transparent);
+}
+
+#adrs[hidden] {
+  display: none;
+}
+
+h2 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.75rem;
+  line-height: 1.2;
+}
+
+.lede {
+  color: var(--muted);
+  font-style: italic;
+  text-wrap: pretty;
+}
+
+#adrs ol {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 2rem;
+  text-align: left;
+}
+
+#adrs li {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.label {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+}
+
+.status {
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+.generated {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  font-style: italic;
 }
 
 footer {

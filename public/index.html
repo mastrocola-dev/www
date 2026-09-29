@@ -15,18 +15,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/main.js"></script>
 </head>
 <body>
   <header class="masthead">mastrocola.dev</header>
 
   <main>
-    <h1>Legacy systems, modernized while they run.</h1>
-    <p class="sub">Marcio Mastrocola — software architect. Event-driven backends, data engineering, and systems that can't stop.</p>
-    <nav aria-label="Profiles and contact">
-      <a href="https://github.com/mastrocola-dev">GitHub</a>
-      <a href="https://www.linkedin.com/in/marcio-mastrocola">LinkedIn</a>
-      <a href="mailto:marcio@mastrocola.dev">Email</a>
-    </nav>
+    <section class="hero">
+      <h1>Legacy systems, modernized while they run.</h1>
+      <p class="sub">Marcio Mastrocola — software architect. Event-driven backends, data engineering, and systems that can't stop.</p>
+      <nav aria-label="Profiles and contact">
+        <a href="https://github.com/mastrocola-dev">GitHub</a>
+        <a href="https://www.linkedin.com/in/marcio-mastrocola">LinkedIn</a>
+        <a href="mailto:marcio@mastrocola.dev">Email</a>
+      </nav>
+    </section>
+
+    <section id="adrs" aria-labelledby="adrs-title" hidden>
+      <h2 id="adrs-title">How this site runs</h2>
+      <p class="lede">Every decision behind it is written down. <a href="https://github.com/mastrocola-dev/service-agent">An AI agent</a> reads <a href="https://github.com/mastrocola-dev/docs">the records</a> and summarizes them below; each summary is reviewed before it ships.</p>
+      <ol></ol>
+      <p class="generated"></p>
+    </section>
   </main>
 
   <footer>Built in public — <a href="https://github.com/mastrocola-dev/infra">hosting, DNS and pipelines</a> are open source.</footer>
