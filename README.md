@@ -2,7 +2,7 @@
 
 Content of [mastrocola.dev](https://mastrocola.dev), served by Azure Static Web Apps. Everything under `public/` ships to the edge on every push to `main`; pull requests get preview environments.
 
-Hosting, DNS and rationale: [infra](https://github.com/mastrocola-dev/infra) and [ADR-002](https://github.com/mastrocola-dev/docs/blob/main/adr/002-public-site-hosting.md). This repo holds no cloud credentials — only the Static Web Apps deployment token, which can publish static content and nothing else.
+Hosting, DNS and rationale: [infra](https://github.com/mastrocola-dev/infra) and [ADR-002](https://github.com/mastrocola-dev/docs/blob/main/adr/002-public-site-hosting.md). This repo holds no secrets: the pipeline authenticates as `id-www` via OIDC and fetches the Static Web Apps deployment token at deploy time ([ADR-006](https://github.com/mastrocola-dev/docs/blob/main/adr/006-identity-and-secrets.md)). Required repository variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `AZURE_RESOURCE_GROUP`, `STATIC_WEB_APP_NAME`.
 
 ## ADR index
 
