@@ -34,16 +34,14 @@
     <section id="ask" aria-labelledby="ask-title" hidden>
       <h2 id="ask-title">Ask how it works</h2>
       <p class="lede">An AI agent answers from <a href="https://github.com/mastrocola-dev/docs">the records</a> and nothing else, and cites the ones it used.</p>
+      <ol class="thread" role="log"></ol>
       <form>
         <label for="question">Your question</label>
-        <textarea id="question" name="question" rows="3" minlength="3" maxlength="500" required></textarea>
+        <textarea id="question" name="question" rows="2" minlength="3" maxlength="500" required></textarea>
         <button type="submit">Ask</button>
       </form>
       <div class="challenge"></div>
-      <p class="progress" role="status"></p>
-      <p class="answer"></p>
-      <ul class="sources"></ul>
-      <p class="note">Questions are sent to the Anthropic API and kept for 24 hours. Your address is not stored.</p>
+      <p class="note">Each question is answered on its own: the agent does not remember the previous one. Questions are sent to the Anthropic API and kept for 24 hours. Your address is not stored.</p>
     </section>
 
     <section id="adrs" aria-labelledby="adrs-title" hidden>

@@ -5,9 +5,7 @@ const section = document.getElementById('ask')
 const form = section.querySelector('form')
 const field = form.elements.question
 const button = form.querySelector('button')
-const status = section.querySelector('.progress')
-const answer = section.querySelector('.answer')
-const sources = section.querySelector('.sources')
+const thread = section.querySelector('.thread')
 
 let widget
 let token
@@ -41,46 +39,56 @@ const prepare = () => {
   document.head.append(element('script', { src: 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit', onload: challenge, onerror: () => settle('') }))
 }
 
-const show = ({ message = '', answer: text = '', sources: links = [] }) => {
-  status.textContent = message
-  answer.textContent = text
-  sources.replaceChildren(...links.map(({ path, url }) => element('li', {}, element('a', { href: url }, path))))
+const show = (reply, { message = '', answer = '', sources = [] }) => {
+  reply.replaceChildren(element('p', { className: 'progress' }, message), element('p', { className: 'answer' }, answer), element('ul', { className: 'sources' }, ...sources.map(({ path, url }) => element('li', {}, element('a', { href: url }, path)))))
+  reply.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
 }
 
 const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
-async function follow(jobId) {
+async function follow(reply, jobId) {
   const deadline = Date.now() + giveUpMs
   while (Date.now() < deadline) {
     await pause(pollMs)
     const response = await fetch(`${endpoint}/jobs/${jobId}`)
     if (!response.ok) continue
     const state = view(await response.json())
-    show(state)
+    show(reply, state)
     if (state.done) return
   }
-  show(timedOut)
+  show(reply, timedOut)
 }
 
-async function ask() {
-  show({ message: 'Checking that you are human' })
+async function ask(reply, question) {
+  show(reply, { message: 'Checking that you are human' })
   const value = await token
-  if (!value) return show({ message: refusal('challenge') })
-  show({ message: 'Sending' })
-  const response = await fetch(`${endpoint}/jobs`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ question: field.value, token: value }) })
+  if (!value) return show(reply, { message: refusal('challenge') })
+  show(reply, { message: 'Sending' })
+  const response = await fetch(`${endpoint}/jobs`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ question, token: value }) })
   const body = await response.json().catch(() => ({}))
-  if (response.status !== 202) return show({ message: refusal(body.error) })
-  show(view({ status: 'queued' }))
-  await follow(body.jobId)
+  if (response.status !== 202) return show(reply, { message: refusal(body.error) })
+  show(reply, view({ status: 'queued' }))
+  await follow(reply, body.jobId)
 }
 
 field.addEventListener('focus', prepare, { once: true })
 
+field.addEventListener('keydown', (event) => {
+  if (event.key !== 'Enter' || event.shiftKey || event.isComposing) return
+  event.preventDefault()
+  form.requestSubmit()
+})
+
 form.addEventListener('submit', (event) => {
   event.preventDefault()
+  if (button.disabled) return
+  const question = field.value
+  const reply = element('li', { className: 'reply' })
+  thread.append(element('li', { className: 'question' }, question), reply)
+  field.value = ''
   button.disabled = true
-  ask()
-    .catch(() => show({ message: refusal() }))
+  ask(reply, question)
+    .catch(() => show(reply, { message: refusal() }))
     .finally(() => {
       button.disabled = false
       renew()

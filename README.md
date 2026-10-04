@@ -20,7 +20,8 @@ The "How this site runs" section is not part of the deploy. At page load, `publi
 - The answer is model output, treated as untrusted like the index: inserted as text, never as markup. Source links are built here, only for `adr/`, `architecture/` and `runbooks/` paths ending in `.md`; anything else is dropped. An answer flagged out of scope is replaced by a fixed message
 - The wait is shown, not hidden: queued, then the agent's latest step, mapped from tool names to fixed phrases — a name the page does not know never reaches the screen
 - Each refusal of the api has its own message: invalid question, failed challenge, busy, daily quota, daily budget
-- Reloading the page abandons the question; nothing is kept in the browser
+- Questions and answers stack up as a thread, but only on the page: each question is an independent job, the agent does not see the previous ones, and the page says so. Reloading empties the thread and abandons a running question; nothing is kept in the browser
+- Enter sends, Shift+Enter breaks the line; one question runs at a time
 - The Content Security Policy adds exactly three origins: `challenges.cloudflare.com` for the Turnstile script and its frame, and `api.mastrocola.dev` for `connect-src`
 - The Turnstile site key in `ask.js` is public by design; the secret lives in Key Vault and only `service-api` reads it. The widget accepts `mastrocola.dev` and `www.mastrocola.dev`, and the api answers browsers from those origins only, so the box does not work in pull request previews
 
