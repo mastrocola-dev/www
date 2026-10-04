@@ -1,12 +1,8 @@
+import './ask-form.js'
 import { parseIndex, source } from './adr-index.js'
+import { element } from './dom.js'
 
 const section = document.getElementById('adrs')
-
-const element = (tag, properties, ...children) => {
-  const node = Object.assign(document.createElement(tag), properties)
-  node.append(...children)
-  return node
-}
 
 const item = (adr) => element('li', {}, element('p', { className: 'label' }, element('a', { href: adr.url }, adr.id), element('span', { className: 'status' }, adr.status)), element('h3', {}, adr.title), element('p', {}, adr.decision))
 
