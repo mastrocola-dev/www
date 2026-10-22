@@ -1,4 +1,14 @@
 {
+  "routes": [
+    {
+      "route": "/resume",
+      "rewrite": "/resume.html"
+    },
+    {
+      "route": "/curriculo",
+      "rewrite": "/curriculo.html"
+    }
+  ],
   "responseOverrides": {
     "404": {
       "rewrite": "/404.html"

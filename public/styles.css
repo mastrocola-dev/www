@@ -86,6 +86,11 @@ h1 {
   text-wrap: pretty;
 }
 
+.availability {
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+}
+
 nav {
   display: flex;
   flex-wrap: wrap;
